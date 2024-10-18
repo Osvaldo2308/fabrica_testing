@@ -12,5 +12,10 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  test: {  // Agrega esta configuración para Vitest
+    environment: 'jsdom',
+    setupFiles: './tests/setup.js',
+    globals: true
   }
 })
