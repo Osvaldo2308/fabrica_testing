@@ -17,3 +17,8 @@
     ></path>
   </svg>
 </template>
+<script>
+export default {
+  name: 'DocumentationIcon', // Asegúrate de que este nombre esté aquí
+}
+</script>
