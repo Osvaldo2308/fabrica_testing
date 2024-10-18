@@ -1,0 +1,38 @@
+name: Vue.js CI
+
+# Controla cuándo se ejecuta el pipeline
+on:
+  push:
+    branches:
+      - main  # Se ejecuta cuando hay un push a la rama main
+  pull_request:
+    branches:
+      - main  # Se ejecuta en cada pull request a la rama main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Usar una máquina virtual de Ubuntu
+
+    steps:
+      # Paso 1: Checkout del código del repositorio
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Paso 2: Instalar Node.js y configurar el entorno
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'  # Especifica la versión de Node.js que usa tu proyecto
+          cache: 'npm'  # Cachear los módulos de npm para acelerar futuras ejecuciones
+
+      # Paso 3: Instalar las dependencias del proyecto
+      - name: Install dependencies
+        run: npm install
+
+      # Paso 4: Ejecutar las pruebas (si tienes pruebas configuradas)
+      - name: Run tests
+        run: npm run test
+
+      # Paso 5: Compilar el proyecto (construir para producción)
+      - name: Build the project
+        run: npm run build
